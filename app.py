@@ -7,8 +7,10 @@ from flask_bootstrap import Bootstrap
 app = Flask(__name__)
 Bootstrap(app)
 
-prefix = "/hzd-web"
-endpoint = "https://loaias.github.io/hzd-web"
+# prefix = "/hzd-web"
+prefix = ""
+# endpoint = "https://loaias.github.io/hzd-web"
+endpoint = "http://www.jxhzd.tk"
 
 
 @app.route("/")
