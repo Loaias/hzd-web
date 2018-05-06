@@ -1395,6 +1395,10 @@ a.face_one i {
 /*-- //team --*/
 
 /*-- events --*/
+.event .img{
+    width: 100%;
+}
+
 .eve-sub2 {
     background: #eee;
     padding: 0.5em 0em;
@@ -1467,11 +1471,11 @@ color: #6a67ce;
 .eve-sub1 h6 a {
     color: #333;
     font-size: 1em;
-    margin-bottom: 2.3em;
+    margin: 1em 0.5em;
     letter-spacing: 1px;
 }
 .eve-sub1 p {
-    margin-bottom: 1.9em;
+    margin-bottom: 1em;
     color: #777;
     font-size: 1em;
     font-weight: 400;
