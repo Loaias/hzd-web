@@ -7,13 +7,15 @@ from flask_bootstrap import Bootstrap
 app = Flask(__name__)
 Bootstrap(app)
 
+prefix = "/hzd-web"
+
 
 @app.route("/")
 def index():
     with open('db.json') as f:
         db = json.load(f)
 
-    response = render_template("index.html", setting=db["setting"],
+    response = render_template("index.html", prefix=prefix, setting=db["setting"],
                                sliders=db["sliders"], categories=db["categories"])
     with open('index.html', 'w') as f:
         f.write(response)
