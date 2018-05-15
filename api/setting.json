@@ -1,0 +1,10 @@
+{
+  "icon": "favicon.ico",
+  "address": " 嘉兴市南湖区泰坤大厦 706室",
+  "email": "JXHZD001@163.COM",
+  "email_return_message": "收到",
+  "email_error_message": "出错",
+  "tolist": "amwayadgt@gmail.com",
+  "logo": "static/logo.jpg",
+  "wechat": "static/QR.jpg"
+}

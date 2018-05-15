@@ -1,0 +1,31 @@
+{
+  "name": "精彩活动",
+  "content": "",
+  "order": 5,
+  "items": [
+    {
+      "id": "event_1",
+      "author": "admin",
+      "title": "丰南社区",
+      "content": "走进新丰镇丰南社区黄鹤花园开展读书会活动",
+      "image": "images/e1.jpg",
+      "created": "2016年3月8日"
+    },
+    {
+      "id": "event_2",
+      "author": "admin",
+      "title": "天河社区",
+      "content": "走进新丰镇丰南社区黄鹤花园开展读书会活动",
+      "image": "images/e2.jpg",
+      "created": "2015年9月14日"
+    },
+    {
+      "id": "event_3",
+      "author": "admin",
+      "title": "长水街道",
+      "content": "赴长水街道社会组织培育中心参观学习",
+      "image": "images/e3.jpg",
+      "created": "2015年8月28日"
+    }
+  ]
+}
