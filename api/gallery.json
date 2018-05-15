@@ -2,31 +2,31 @@
   "name": "照片展示",
   "items": [
     {
-      "content": "“美家庭、睦邻里、促和谐”心理健康知识宣展暨现场心理咨询公益体验",
+      "title": "“美家庭、睦邻里、促和谐”心理健康知识宣展暨现场心理咨询公益体验",
       "image": "static/images/g1.jpg"
     },
     {
-      "content": "还在孵化期时的和之道在社会组织孵化中心的幸福密码讲座",
+      "title": "还在孵化期时的和之道在社会组织孵化中心的幸福密码讲座",
       "image": "static/images/g2.jpg"
     },
     {
-      "content": "和之道心理健康知识公益巡讲启动仪式",
+      "title": "和之道心理健康知识公益巡讲启动仪式",
       "image": "static/images/g3.jpg"
     },
     {
-      "content": "和之道心理健康知识公益巡讲走进嘉州美都社区",
+      "title": "和之道心理健康知识公益巡讲走进嘉州美都社区",
       "image": "static/images/g4.jpg"
     },
     {
-      "content": "和之道心理文化传播中心走进嘉兴职业技术学院招收志愿者",
+      "title": "和之道心理文化传播中心走进嘉兴职业技术学院招收志愿者",
       "image": "static/images/g5.jpg"
     },
     {
-      "content": "快乐从心出发 老年心理健康知识公益巡讲走进华玉佳苑社区",
+      "title": "快乐从心出发 老年心理健康知识公益巡讲走进华玉佳苑社区",
       "image": "static/images/g6.jpg"
     },
     {
-      "content": "如何与孩子说话亲子沟通专项讲座走进湘城社区",
+      "title": "如何与孩子说话亲子沟通专项讲座走进湘城社区",
       "image": "static/images/g7.jpg"
     }
   ]

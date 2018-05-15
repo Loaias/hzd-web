@@ -1,43 +1,29 @@
 {
   "name": "机构组成",
-  "content": "",
-  "order": 4,
   "items": [
     {
-      "author": "admin",
       "title": "管理部",
-      "content": "",
-      "image": "images/t1.jpg"
+      "image": "static/images/t1.jpg"
     },
     {
-      "author": "admin",
       "title": "财务部",
-      "content": "",
-      "image": "images/t2.jpg"
+      "image": "static/images/t2.jpg"
     },
     {
-      "author": "admin",
       "title": "宣传部",
-      "content": "",
-      "image": "images/t3.jpg"
+      "image": "static/images/t3.jpg"
     },
     {
-      "author": "admin",
       "title": "外联部",
-      "content": "",
-      "image": "images/t4.jpg"
+      "image": "static/images/t4.jpg"
     },
     {
-      "author": "admin",
       "title": "讲师团队",
-      "content": "",
-      "image": "images/t5.jpg"
+      "image": "static/images/t5.jpg"
     },
     {
-      "author": "admin",
       "title": "志愿者",
-      "content": "",
-      "image": "images/t6.jpg"
+      "image": "static/images/t6.jpg"
     }
   ]
 }
