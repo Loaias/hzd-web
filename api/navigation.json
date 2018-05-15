@@ -1,22 +1,22 @@
 [
-	{
-		"id": "about",
-		"name": "关于我们"
-	},
-	{
-		"id": "service",
-		"name": "公益项目"
-	},
-	{
-		"key": "gallery",
-		"name": "照片展示"
-	},
-	{
-		"key": "team",
-		"name": "机构组成"
-	},
-	{
-		"key": "event",
-		"name": "精彩活动"
-	}
+  {
+    "id": "about",
+    "name": "关于我们"
+  },
+  {
+    "id": "service",
+    "name": "公益项目"
+  },
+  {
+    "key": "gallery",
+    "name": "照片展示"
+  },
+  {
+    "key": "team",
+    "name": "机构组成"
+  },
+  {
+    "key": "event",
+    "name": "精彩活动"
+  }
 ]
