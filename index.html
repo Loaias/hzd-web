@@ -113,15 +113,13 @@
 
     <!--about-->
     <div id="about" class="about">
-
         <div class="container">
             <h1>{{ about.name }}</h1>
-
             <h2>{{ about.content }}</h2>
 
             <div class="specialty-grids-top">
                 
-                <div class="col-md-4 service-box" style="visibility: visible; -webkit-animation-delay: 0.4s;" v-for="item in about.items">
+                <div class="col-md-4 service-box" style="visibility: visible;" v-for="item in about.items">
                     <figure class="icon">
                         <span class="glyphicon a3" :class="item.icon" aria-hidden="true"></span>
                     </figure>
@@ -138,6 +136,7 @@
                     </h5>
                 </div>
             </div>
+
             <div class="clearfix"></div>
         </div>
     </div>
@@ -145,7 +144,6 @@
 
     <!-- services -->
     <div class="services" id="service">
-
         <h3>{{ service.name }}</h3>
 
         <div id="services-wrap">
@@ -160,142 +158,22 @@
                 <p>{{ item.content }}</p>
             </div>
 
-            <div class="col-md-2 services-gd text-center" data-wow-delay=".5s">
-                <div class="hi-icon-wrap hi-icon-effect-9 hi-icon-effect-9a">
-                    <a href="#" class="hi-icon">
-                        <img src="/static/images/book.png" alt="快乐从“心”出发 老年心理健康知识公益巡讲" />
-                    </a>
-                </div>
-                <h4>快乐从“心”出发 老年心理健康知识公益巡讲</h4>
-                <p>通过心理沙龙、小组趣味活动等形式为空巢老人开展心理援助服务，疏解空巢老人孤单、寂寞、郁闷、沮丧等不良情绪，给予空巢老人精神上的关爱慰藉，为社会树立一个关爱空巢老人心理的榜样，以期引起更多社会人士对空巢老人的心理精神上的关注。</p>
-            </div>
-
-            <div class="col-md-2 services-gd text-center" data-wow-delay=".5s">
-                <div class="hi-icon-wrap hi-icon-effect-9 hi-icon-effect-9a">
-                    <a href="#" class="hi-icon">
-                        <img src="/static/images/edu.png" alt="大型心理健康知识公益巡讲走进社区" />
-                    </a>
-                </div>
-                <h4>大型心理健康知识公益巡讲走进社区</h4>
-                <p>宣传普及心理健康知识，让更多的人了解和关注心理健康问题，预防心理疾病的产生。让心理健康人群能够了解心理健康知识，预防心理亚健康问题的出现。让心理亚健康人群了解到自身存在的心理问题，并能够学会自我调节，主动改善自身心理健康问题。帮助有心理疾病的人群克服羞于就医的心理障碍。</p>
-            </div>
-
-            <div class="col-md-2 services-gd text-center" data-wow-delay=".5s">
-                <div class="hi-icon-wrap hi-icon-effect-9 hi-icon-effect-9a">
-                    <a href="#" class="hi-icon">
-                        <img src="/static/images/uni.png" alt="“美家庭、睦邻里、促和谐”——心理健康知识宣展暨现场心理咨询公益体" />
-                    </a>
-                </div>
-                <h4>“美家庭、睦邻里、促和谐”——心理健康知识宣展暨现场心理咨询公益体</h4>
-                <p>以“关注心理健康 拥抱幸福生活”为主题，通过展板形式向市民宣传普及心理健康知识，提高市民心理健康知识自我保健意识；发放心理健康知识读本，进一步普及心理健康常识；现场邀请多位心理咨询师为广大市民提供公益免费的心理咨询体验。</p>
-            </div>
-
-            <div class="col-md-2 services-gd text-center" data-wow-delay=".5s">
-                <div class="hi-icon-wrap hi-icon-effect-9 hi-icon-effect-9a">
-                    <a href="#" class="hi-icon">
-                        <img src="/static/images/hourglass.png" alt="生命欢乐颂系统排列工作坊" />
-                    </a>
-                </div>
-                <h4>生命欢乐颂系统排列工作坊</h4>
-                <p>帮助你察觉自我情绪和行为模式产生的源头和反应机制，呈现生命中爱与关系的真相；向内挖掘生命潜能，向外发现更多的可能性。帮助你将生命中遇到的难题转化为正向目标并自发作出内在改变，从而建立更高自我价值，达到内心和谐平衡，提升心灵品质。</p>
-            </div>
-
         </div>
         <div class="clearfix"></div>
     </div>
     <!-- //services -->
 
     <!-- gallery -->
-
     <div class="portfolio" id="gallery">
-        <h3>照片展示</h3>
+        <h3>{{ gallery.name }}</h3>
 
-        <div class="portfolio-top wow fadeInDown animated" data-wow-delay=".5s">
+        <div class="portfolio-top wow fadeInDown animated" data-wow-delay=".5s" v-for="item in gallery.items">
             <div class="col-md-4 grid slideanim">
                 <figure class="effect-jazz">
-                    <a href="#portfolioModalgallery_1" data-toggle="modal">
-                        <img src="/static/images/g1.jpg" alt="“美家庭、睦邻里、促和谐”心理健康知识宣展暨现场心理咨询公益体验" class="img-responsive" />
+                    <a href="#portfolioModalgallery" data-toggle="modal" @click="show_portfolio(0)">
+                        <img :src="item.image" :alt="item.title" class="img-responsive" />
                         <figcaption>
-                            <h4>“美家庭、睦邻里、促和谐”心理健康知识宣展暨现场心理咨询公益体验</h4>
-                        </figcaption>
-                    </a>
-                </figure>
-            </div>
-        </div>
-
-        <div class="portfolio-top wow fadeInDown animated" data-wow-delay=".5s">
-            <div class="col-md-4 grid slideanim">
-                <figure class="effect-jazz">
-                    <a href="#portfolioModalgallery_2" data-toggle="modal">
-                        <img src="/static/images/g2.jpg" alt="还在孵化期时的和之道在社会组织孵化中心的幸福密码讲座" class="img-responsive" />
-                        <figcaption>
-                            <h4>还在孵化期时的和之道在社会组织孵化中心的幸福密码讲座</h4>
-                        </figcaption>
-                    </a>
-                </figure>
-            </div>
-        </div>
-
-        <div class="portfolio-top wow fadeInDown animated" data-wow-delay=".5s">
-            <div class="col-md-4 grid slideanim">
-                <figure class="effect-jazz">
-                    <a href="#portfolioModalgallery_3" data-toggle="modal">
-                        <img src="/static/images/g3.jpg" alt="和之道心理健康知识公益巡讲启动仪式" class="img-responsive" />
-                        <figcaption>
-                            <h4>和之道心理健康知识公益巡讲启动仪式</h4>
-                        </figcaption>
-                    </a>
-                </figure>
-            </div>
-        </div>
-
-
-        <div class="portfolio-top wow fadeInUp animated" data-wow-delay=".5s">
-            <div class="col-md-3 grid grid-wi slideanim">
-                <figure class="effect-jazz">
-                    <a href="#portfolioModalgallery_4" data-toggle="modal">
-                        <img src="/static/images/g4.jpg" alt="和之道心理健康知识公益巡讲走进嘉州美都社区" class="img-responsive" />
-                        <figcaption>
-                            <h4 class="effcet-text">和之道心理健康知识公益巡讲走进嘉州美都社区</h4>
-                        </figcaption>
-                    </a>
-                </figure>
-            </div>
-        </div>
-
-        <div class="portfolio-top wow fadeInUp animated" data-wow-delay=".5s">
-            <div class="col-md-3 grid grid-wi slideanim">
-                <figure class="effect-jazz">
-                    <a href="#portfolioModalgallery_5" data-toggle="modal">
-                        <img src="/static/images/g5.jpg" alt="和之道心理文化传播中心走进嘉兴职业技术学院招收志愿者" class="img-responsive" />
-                        <figcaption>
-                            <h4 class="effcet-text">和之道心理文化传播中心走进嘉兴职业技术学院招收志愿者</h4>
-                        </figcaption>
-                    </a>
-                </figure>
-            </div>
-        </div>
-
-        <div class="portfolio-top wow fadeInUp animated" data-wow-delay=".5s">
-            <div class="col-md-3 grid grid-wi slideanim">
-                <figure class="effect-jazz">
-                    <a href="#portfolioModalgallery_6" data-toggle="modal">
-                        <img src="/static/images/g6.jpg" alt="快乐从心出发 老年心理健康知识公益巡讲走进华玉佳苑社区" class="img-responsive" />
-                        <figcaption>
-                            <h4 class="effcet-text">快乐从心出发 老年心理健康知识公益巡讲走进华玉佳苑社区</h4>
-                        </figcaption>
-                    </a>
-                </figure>
-            </div>
-        </div>
-
-        <div class="portfolio-top wow fadeInUp animated" data-wow-delay=".5s">
-            <div class="col-md-3 grid grid-wi slideanim">
-                <figure class="effect-jazz">
-                    <a href="#portfolioModalgallery_7" data-toggle="modal">
-                        <img src="/static/images/g7.jpg" alt="如何与孩子说话亲子沟通专项讲座走进湘城社区" class="img-responsive" />
-                        <figcaption>
-                            <h4 class="effcet-text">如何与孩子说话亲子沟通专项讲座走进湘城社区</h4>
+                            <h4>{{ item.content }}</h4>
                         </figcaption>
                     </a>
                 </figure>
@@ -303,6 +181,26 @@
         </div>
 
         <div class="clearfix"></div>
+
+        <!-- Portfolio Modals -->
+        <div class="portfolio-modal modal fade slideanim" id="portfolioModalgallery" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-content">
+                <div class="close-modal" data-dismiss="modal">
+                    <div class="lr">
+                        <div class="rl"></div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="modal-body">
+                            <img :src="gallery.items[portfolio].image" class="img-responsive" :alt="gallery.items[portfolio].content">
+                            <p>{{ gallery.items[portfolio].content }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /Portfolio Modals -->
     </div>
     <!-- Portfolio Modals -->
 
@@ -813,7 +711,27 @@
                         });
                 }
             });
-        
+
+            const gallery = new Vue({
+                el: '#gallery',
+                data: {
+                    gallery: {},
+                    portfolio: 0
+                },
+                methods: {
+                    show_portfolio(i) {
+                        console.log(i);
+                    }
+                },
+                created () {
+                    fetch(url + "api/gallery.json")
+                        .then(response => response.json())
+                        .then(json => {
+                            this.gallery = json;
+                        });
+                }
+            });
+
         });
     </script>
 
