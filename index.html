@@ -221,13 +221,13 @@
     <div class="team" id="team">
 
         <div class="container">
-            <h3 class="title">机构组成</h3>
+            <h3 class="title">{{ team.name }}</h3>
             <div class="team_gds">
 
-                <div class="col-md-3 team_gd1 wow zoomIn" data-wow-duration="1.5s" data-wow-delay="0.1s">
+                <div class="col-md-3 team_gd1 wow zoomIn" data-wow-duration="1.5s" data-wow-delay="0.1s" v-for="item in team.items">
                     <div class="team_pos">
                         <div class="team_back"></div>
-                        <img class="img-responsive" src="/static/images/t1.jpg" alt="管理部">
+                        <img class="img-responsive" :src="item.image" alt="管理部">
                         <div class="team_info" style="display: none;">
                             <a href="#" class="face_one">
                                 <i class=" so1 fa fa-facebook fc1" aria-hidden="true"></i>
@@ -240,102 +240,7 @@
                             </a>
                         </div>
                     </div>
-                    <h4>管理部</h4>
-                </div>
-
-                <div class="col-md-3 team_gd1 wow zoomIn" data-wow-duration="1.5s" data-wow-delay="0.1s">
-                    <div class="team_pos">
-                        <div class="team_back"></div>
-                        <img class="img-responsive" src="/static/images/t2.jpg" alt="财务部">
-                        <div class="team_info" style="display: none;">
-                            <a href="#" class="face_one">
-                                <i class=" so1 fa fa-facebook fc1" aria-hidden="true"></i>
-                            </a>
-                            <a href="#" class="face_one">
-                                <i class=" so2 fa fa-twitter fc2" aria-hidden="true"></i>
-                            </a>
-                            <a href="#" class="face_one">
-                                <i class=" so3 fa fa-google fc3" aria-hidden="true"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <h4>财务部</h4>
-                </div>
-
-                <div class="col-md-3 team_gd1 wow zoomIn" data-wow-duration="1.5s" data-wow-delay="0.1s">
-                    <div class="team_pos">
-                        <div class="team_back"></div>
-                        <img class="img-responsive" src="/static/images/t3.jpg" alt="宣传部">
-                        <div class="team_info" style="display: none;">
-                            <a href="#" class="face_one">
-                                <i class=" so1 fa fa-facebook fc1" aria-hidden="true"></i>
-                            </a>
-                            <a href="#" class="face_one">
-                                <i class=" so2 fa fa-twitter fc2" aria-hidden="true"></i>
-                            </a>
-                            <a href="#" class="face_one">
-                                <i class=" so3 fa fa-google fc3" aria-hidden="true"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <h4>宣传部</h4>
-                </div>
-
-                <div class="col-md-3 team_gd1 wow zoomIn" data-wow-duration="1.5s" data-wow-delay="0.1s">
-                    <div class="team_pos">
-                        <div class="team_back"></div>
-                        <img class="img-responsive" src="/static/images/t4.jpg" alt="外联部">
-                        <div class="team_info" style="display: none;">
-                            <a href="#" class="face_one">
-                                <i class=" so1 fa fa-facebook fc1" aria-hidden="true"></i>
-                            </a>
-                            <a href="#" class="face_one">
-                                <i class=" so2 fa fa-twitter fc2" aria-hidden="true"></i>
-                            </a>
-                            <a href="#" class="face_one">
-                                <i class=" so3 fa fa-google fc3" aria-hidden="true"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <h4>外联部</h4>
-                </div>
-
-                <div class="col-md-3 team_gd1 wow zoomIn" data-wow-duration="1.5s" data-wow-delay="0.1s">
-                    <div class="team_pos">
-                        <div class="team_back"></div>
-                        <img class="img-responsive" src="/static/images/t5.jpg" alt="讲师团队">
-                        <div class="team_info" style="display: none;">
-                            <a href="#" class="face_one">
-                                <i class=" so1 fa fa-facebook fc1" aria-hidden="true"></i>
-                            </a>
-                            <a href="#" class="face_one">
-                                <i class=" so2 fa fa-twitter fc2" aria-hidden="true"></i>
-                            </a>
-                            <a href="#" class="face_one">
-                                <i class=" so3 fa fa-google fc3" aria-hidden="true"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <h4>讲师团队</h4>
-                </div>
-
-                <div class="col-md-3 team_gd1 wow zoomIn" data-wow-duration="1.5s" data-wow-delay="0.1s">
-                    <div class="team_pos">
-                        <div class="team_back"></div>
-                        <img class="img-responsive" src="/static/images/t6.jpg" alt="志愿者">
-                        <div class="team_info" style="display: none;">
-                            <a href="#" class="face_one">
-                                <i class=" so1 fa fa-facebook fc1" aria-hidden="true"></i>
-                            </a>
-                            <a href="#" class="face_one">
-                                <i class=" so2 fa fa-twitter fc2" aria-hidden="true"></i>
-                            </a>
-                            <a href="#" class="face_one">
-                                <i class=" so3 fa fa-google fc3" aria-hidden="true"></i>
-                            </a>
-                        </div>
-                    </div>
-                    <h4>志愿者</h4>
+                    <h4>{{ item.title }}</h4>
                 </div>
 
                 <div class="clearfix"></div>
@@ -612,6 +517,20 @@
                         .then(response => response.json())
                         .then(json => {
                             this.gallery = json;
+                        });
+                }
+            });
+        
+            const team = new Vue({
+                el: '#team',
+                data: {
+                    team: {}
+                },
+                created () {
+                    fetch(url + "api/team.json")
+                        .then(response => response.json())
+                        .then(json => {
+                            this.team = json;
                         });
                 }
             });
