@@ -16,8 +16,8 @@
     />
 
     <!-- icon -->
-    <link rel="icon" sizes="any" mask href="/static/favicon.ico">
-    <link rel="shortcut icon" href="/static/favicon.ico" type="image/x-icon" />
+    <link rel="icon" sizes="any" mask href="static/favicon.ico">
+    <link rel="shortcut icon" href="static/favicon.ico" type="image/x-icon" />
 
 
 
@@ -167,13 +167,26 @@
     <div class="portfolio" id="gallery">
         <h3>{{ gallery.name }}</h3>
 
-        <div class="portfolio-top wow fadeInDown animated" data-wow-delay=".5s" v-for="item in gallery.items">
+        <div class="portfolio-top wow fadeInDown animated" data-wow-delay=".5s" v-for="(item, i) in gallery.items.slice(0,3)">
             <div class="col-md-4 grid slideanim">
                 <figure class="effect-jazz">
-                    <a href="#portfolioModalgallery" data-toggle="modal" @click="show_portfolio(0)">
+                    <a href="#portfolioModalgallery" data-toggle="modal" @click="show_portfolio(i)">
                         <img :src="item.image" :alt="item.title" class="img-responsive" />
                         <figcaption>
                             <h4>{{ item.content }}</h4>
+                        </figcaption>
+                    </a>
+                </figure>
+            </div>
+        </div>
+
+        <div class="portfolio-top wow fadeInUp animated" data-wow-delay=".5s" v-for="(item, i) in gallery.items.slice(3)">
+            <div class="col-md-3 grid grid-wi slideanim">
+                <figure class="effect-jazz">
+                    <a href="#portfolioModalgallery" data-toggle="modal" @click="show_portfolio(i + 3)">
+                        <img :src="item.image" :alt="item.title" class="img-responsive"/>
+                        <figcaption>
+                            <h4 class="effcet-text">{{ item.title }}</h4>
                         </figcaption>
                     </a>
                 </figure>
@@ -193,8 +206,8 @@
                 <div class="container">
                     <div class="col-lg-8 col-lg-offset-2">
                         <div class="modal-body">
-                            <img :src="gallery.items[portfolio].image" class="img-responsive" :alt="gallery.items[portfolio].content">
-                            <p>{{ gallery.items[portfolio].content }}</p>
+                            <img :src="gallery.items[portfolio_index].image" class="img-responsive" :alt="gallery.items[portfolio_index].content">
+                            <p>{{ gallery.items[portfolio_index].content }}</p>
                         </div>
                     </div>
                 </div>
@@ -715,12 +728,12 @@
             const gallery = new Vue({
                 el: '#gallery',
                 data: {
-                    gallery: {},
-                    portfolio: 0
+                    gallery: {items:[{}]},
+                    portfolio_index: 0
                 },
                 methods: {
                     show_portfolio(i) {
-                        this.portfolio = i;
+                        this.portfolio_index = i;
                     }
                 },
                 created () {
