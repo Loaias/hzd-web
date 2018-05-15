@@ -146,9 +146,19 @@
     <!-- services -->
     <div class="services" id="service">
 
-        <h3>公益项目</h3>
+        <h3>{{ service.name }}</h3>
 
         <div id="services-wrap">
+
+            <div class="col-md-2 services-gd text-center" data-wow-delay=".5s" v-for="item in service.items">
+                <div class="hi-icon-wrap hi-icon-effect-9 hi-icon-effect-9a">
+                    <a href="#" class="hi-icon">
+                        <img :src="item.icon" :alt="item.title" />
+                    </a>
+                </div>
+                <h4>{{ item.title }}</h4>
+                <p>{{ item.content }}</p>
+            </div>
 
             <div class="col-md-2 services-gd text-center" data-wow-delay=".5s">
                 <div class="hi-icon-wrap hi-icon-effect-9 hi-icon-effect-9a">
@@ -739,8 +749,11 @@
                         .then(response => response.json())
                         .then(json => {
                             this.navigation = json;
+                        })
+                        .then(_ => {
+                            scroll_action();
                         });
-
+                    
                     fetch(url + "api/setting.json")
                         .then(response => response.json())
                         .then(json => {
@@ -760,21 +773,9 @@
                         .then(json => {
                             this.sliders = json;
                         })
-                        .then(function() {
-                            $("#slider").responsiveSlides({
-                                auto: true,
-                                pager: false,
-                                nav: true,
-                                speed: 1000,
-                                namespace: "callbacks",
-                                before: function () {
-                                    $('.events').append("<li>before event fired.</li>");
-                                },
-                                after: function () {
-                                    $('.events').append("<li>after event fired.</li>");
-                                }
-                            });
-                        });
+                        .then(_ => {
+                            responsive_slides();
+                        })
                 }
             });
         
@@ -798,6 +799,21 @@
                         });
                 }
             });
+        
+            const service = new Vue({
+                el: '#service',
+                data: {
+                    service: {}
+                },
+                created () {
+                    fetch(url + "api/service.json")
+                        .then(response => response.json())
+                        .then(json => {
+                            this.service = json;
+                        });
+                }
+            });
+        
         });
     </script>
 
@@ -819,17 +835,34 @@
     <!--//required-js-files-->
 
     <script src="static/js/responsiveslides.min.js"></script>
+    <script>
+        function responsive_slides() {
+            $("#slider").responsiveSlides({
+                auto: true,
+                pager: false,
+                nav: true,
+                speed: 1000,
+                namespace: "callbacks",
+                before: function () {
+                    $('.events').append("<li>before event fired.</li>");
+                },
+                after: function () {
+                    $('.events').append("<li>after event fired.</li>");
+                }
+            });
+        }
+    </script>
 
     <!-- start-smoth-scrolling -->
     <script type="text/javascript" src="static/js/move-top.js"></script>
     <script type="text/javascript" src="static/js/easing.js"></script>
     <script type="text/javascript">
-        jQuery(document).ready(function ($) {
+        function scroll_action() {
             $(".scroll").click(function (event) {
                 event.preventDefault();
                 $('html,body').animate({ scrollTop: $(this.hash).offset().top }, 1000);
             });
-        });
+        }
     </script>
     <!-- start-smoth-scrolling -->
 
