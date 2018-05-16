@@ -16,10 +16,8 @@
     />
 
     <!-- icon -->
-    <link rel="icon" sizes="any" mask href="static/favicon.ico">
-    <link rel="shortcut icon" href="static/favicon.ico" type="image/x-icon" />
-
-
+    <link rel="shortcut icon" :href="setting.icon" type="image/x-icon" />
+    <link rel="icon" sizes="any" mask :href="setting.icon">
 
     <!-- Bootstrap -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css">
@@ -85,8 +83,6 @@
     </div>
     <!-- //navigation -->
 
-
-
     <div class="main-w3layouts" id="home">
         <div class="header">
             <!-- Slider -->
@@ -94,11 +90,11 @@
                 <div class="callbacks_container">
                     <ul class="rslides" id="slider">
 
-                        <li v-for="item in sliders">
+                        <li v-for="slider in sliders">
                             <div class="slider-info" style="padding: 20px;">
-                                <h3 style="color: rgb(106, 103, 206);">{{ item.title }}</h3>
+                                <h3 style="color: rgb(106, 103, 206);">{{ slider.title }}</h3>
                                 <p style="font-size: 1.2em; line-height: 1.4em; color: white; text-align: left; text-indent: 2em;">
-                                    {{ item.content }}
+                                    {{ slider.content }}
                                 </p>
                             </div>
                         </li>
@@ -206,8 +202,8 @@
                 <div class="container">
                     <div class="col-lg-8 col-lg-offset-2">
                         <div class="modal-body">
-                            <img :src="gallery.items[portfolio_index].image" class="img-responsive" :alt="gallery.items[portfolio_index].title">
-                            <p>{{ gallery.items[portfolio_index].title }}</p>
+                            <img :src="gallery.items[current].image" class="img-responsive" :alt="gallery.items[current].title">
+                            <p>{{ gallery.items[current].title }}</p>
                         </div>
                     </div>
                 </div>
@@ -250,109 +246,56 @@
     <!-- //institutions -->
 
     <!-- Events -->
-
     <div class="event" id="event">
         <div class="container">
-            <h3>精彩活动</h3>
+            <h3>{{ event.name }}</h3>
 
-            <div class="col-md-4 eve-agile">
+            <div class="col-md-4 eve-agile" v-for="(item, i) in event.items">
                 <div class="eve-sub1">
-                    <a href="#" data-toggle="modal" data-target="#eventModalevent_1">
-                        <img src="/static/images/e1.jpg" alt="丰南社区" />
+                    <a href="#" data-toggle="modal" data-target="#eventModalevent" @click="show_portfolio(i)">
+                        <img :src="item.image" :alt="item.name" />
                     </a>
                     <h6>By an
-                        <a href="#">admin</a>, 2016年3月8日</h6>
-                    <p>走进新丰镇丰南社区黄鹤花园开展读书会活动</p>
-                    <div class="social-share" data-sites="weibo,qq,wechat,linkedin" data-title="嘉兴市和之道心理文化传播中心" data-weibo-title="嘉兴市和之道心理文化传播中心 -- 走进新丰镇丰南社区黄鹤花园开展读书会活动"
-                        data-image="http://www.jxhzd.tk/static/images/e1.jpg" data-description="走进新丰镇丰南社区黄鹤花园开展读书会活动"></div>
-                </div>
-            </div>
-
-            <div class="col-md-4 eve-agile">
-                <div class="eve-sub1">
-                    <a href="#" data-toggle="modal" data-target="#eventModalevent_2">
-                        <img src="/static/images/e2.jpg" alt="天河社区" />
-                    </a>
-                    <h6>By an
-                        <a href="#">admin</a>, 2015年9月14日</h6>
-                    <p>走进新丰镇丰南社区黄鹤花园开展读书会活动</p>
-                    <div class="social-share" data-sites="weibo,qq,wechat,linkedin" data-title="嘉兴市和之道心理文化传播中心" data-weibo-title="嘉兴市和之道心理文化传播中心 -- 走进新丰镇丰南社区黄鹤花园开展读书会活动"
-                        data-image="http://www.jxhzd.tk/static/images/e2.jpg" data-description="走进新丰镇丰南社区黄鹤花园开展读书会活动"></div>
-                </div>
-            </div>
-
-            <div class="col-md-4 eve-agile">
-                <div class="eve-sub1">
-                    <a href="#" data-toggle="modal" data-target="#eventModalevent_3">
-                        <img src="/static/images/e3.jpg" alt="长水街道" />
-                    </a>
-                    <h6>By an
-                        <a href="#">admin</a>, 2015年8月28日</h6>
-                    <p>赴长水街道社会组织培育中心参观学习</p>
-                    <div class="social-share" data-sites="weibo,qq,wechat,linkedin" data-title="嘉兴市和之道心理文化传播中心" data-weibo-title="嘉兴市和之道心理文化传播中心 -- 赴长水街道社会组织培育中心参观学习"
-                        data-image="http://www.jxhzd.tk/static/images/e3.jpg" data-description="赴长水街道社会组织培育中心参观学习"></div>
+                        <a href="#">{{ item.author }}</a>, {{ item.created }}</h6>
+                    <p>{{ item.content }}</p>
+                    <div class="social-share" data-sites="weibo,wechat" :data-title="item.name" :data-weibo-title="'嘉兴市和之道心理文化传播中心 -- ' + item.content"
+                        :data-image="url + item.image" :data-description="item.title"></div>
                 </div>
             </div>
 
         </div>
-    </div>
 
-    <div class="modal fade" id="eventModalevent_1" tabindex="-1" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4>丰南社区</h4>
-                    <img src="/static/images/e1.jpg" alt="丰南社区" />
-                    <span>走进新丰镇丰南社区黄鹤花园开展读书会活动</span>
+        <!-- Portfolio Modals -->
+        <div class="modal fade" id="eventModalevent" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4>{{ event.items[current].title }}</h4>
+                        <img :src="event.items[current].image" :alt="event.items[current].name" />
+                        <span>{{ event.items[current].content }}</span>
+                    </div>
                 </div>
             </div>
         </div>
+        <!-- /Portfolio Modals -->
     </div>
-
-    <div class="modal fade" id="eventModalevent_2" tabindex="-1" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4>天河社区</h4>
-                    <img src="/static/images/e2.jpg" alt="天河社区" />
-                    <span>走进新丰镇丰南社区黄鹤花园开展读书会活动</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="eventModalevent_3" tabindex="-1" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4>长水街道</h4>
-                    <img src="/static/images/e3.jpg" alt="长水街道" />
-                    <span>赴长水街道社会组织培育中心参观学习</span>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- //Events -->
 
     <div class="map">
-        <iframe id="baidu_map" src="/static/html/map.html" style="border:0" allowfullscreen></iframe>
-        <h4 style="top: 5%">
-            <span style="cursor: pointer;">在地图上找到我们</span>
-        </h4>
+        <iframe id="baidu_map" src="static/html/map.html" style="border:0" allowfullscreen></iframe>
+        <button type="button" class="btn btn-default btn-sm">
+            <span class="glyphicon glyphicon-refresh"></span> 在地图上找到我们
+        </button>
     </div>
-
 
     <!-- footer -->
     <div class="footer" id="footer">
 
         <div class="container">
             <div class="col-md-4 agileinfo_footer_grid">
-                <h4>关于我们</h4>
-                <p>和之道心理文化传播中心以“传播心理健康文化，引航和谐幸福人生”为使命，应用心理学知识解决个人成长困惑、婚姻家庭矛盾、老人族群心理失落等各类社会问题，中心以大型公益讲座形式推进心理健康知识的传播，和谐幸福家庭经营之道的传播，同时辅之以小型工作坊、个案咨询，促成个体的心理健康成长，减少婚姻家庭矛盾冲突，以个体的幸福、家庭的美满，促进社会的和谐发展。</p>
+                <h4>{{ about.name }}</h4>
+                <p>{{ about.content }}</p>
             </div>
             <div class="col-md-4 agileinfo_footer_grid mid-w3l nav2">
                 <h4>站内导航</h4>
@@ -361,44 +304,26 @@
                         <a href="#home" class="scroll">首页</a>
                     </li>
 
-                    <li>
-                        <a href="#about" class="scroll">关于我们</a>
+                    <li v-for="item in navigation">
+                        <a :href="'#' + item.id" class="scroll">{{ item.name }}</a>
                     </li>
-
-                    <li>
-                        <a href="#service" class="scroll">公益项目</a>
-                    </li>
-
-                    <li>
-                        <a href="#gallery" class="scroll">照片展示</a>
-                    </li>
-
-                    <li>
-                        <a href="#team" class="scroll">机构组成</a>
-                    </li>
-
-                    <li>
-                        <a href="#event" class="scroll">精彩活动</a>
-                    </li>
-
-                    <!-- <li><a href="#testimonials" class="scroll">Testimonials</a></li> -->
                 </ul>
             </div>
             <div class="col-md-4 agileinfo_footer_grid mid-w3l nav2">
                 <h4>联系地址</h4>
                 <ul style="padding-left: 15px;">
                     <li style="width: 100%;">
-                        <span class="glyphicon glyphicon-home" aria-hidden="true"></span> 嘉兴市南湖区泰坤大厦 706室
+                        <span class="glyphicon glyphicon-home" aria-hidden="true"></span> {{ setting.address }}
                     </li>
                     <li style="width: 100%;">
                         <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
-                        <a href="mailto:JXHZD001@163.COM">JXHZD001@163.COM</a>
+                        <a :href="'mailto:' + setting.email">{{ setting.email }}</a>
                     </li>
                     <!-- <li><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> (021) kdkd </li> -->
                 </ul>
             </div>
             <div class="col-md-4 agileinfo_footer_grid mid-w3l nav2">
-                <img src="/static/QR.jpg" width="120" />
+                <img :src="setting.wechat" width="120" />
                 <h4>官方微信</h4>
             </div>
 
@@ -411,132 +336,8 @@
     <!-- //footer -->
 
 
-
-
-
-
-
-
-
-
     <script type="text/javascript" src="static/js/jquery-2.1.4.min.js"></script>
     <script src="https://vuejs.org/js/vue.min.js"></script>
-    <script>
-        $(function () {
-            const url = "http://www.jxhzd.tk/";
-
-            const navigation = new Vue({
-                el: "#top-nav",
-                data: {
-                    setting: {},
-                    navigation: []
-                },
-                created() {
-                    fetch(url + "api/navigation.json")
-                        .then(response => response.json())
-                        .then(json => {
-                            this.navigation = json;
-                        })
-                        .then(_ => {
-                            scroll_action();
-                        });
-                    
-                    fetch(url + "api/setting.json")
-                        .then(response => response.json())
-                        .then(json => {
-                            this.setting = json;
-                        });
-                }
-            });
-
-            const slider = new Vue({
-                el: "#slider",
-                data: {
-                    sliders: []
-                },
-                created() {
-                    fetch(url + "api/sliders.json")
-                        .then(response => response.json())
-                        .then(json => {
-                            this.sliders = json;
-                        })
-                        .then(_ => {
-                            responsive_slides();
-                        })
-                }
-            });
-        
-            const about = new Vue({
-                el: '#about',
-                data: {
-                    about: {},
-                    setting: {}
-                },
-                created () {
-                    fetch(url + "api/about.json")
-                        .then(response => response.json())
-                        .then(json => {
-                            this.about = json;
-                        });
-
-                    fetch(url + "api/setting.json")
-                        .then(response => response.json())
-                        .then(json => {
-                            this.setting = json;
-                        });
-                }
-            });
-        
-            const service = new Vue({
-                el: '#service',
-                data: {
-                    service: {}
-                },
-                created () {
-                    fetch(url + "api/service.json")
-                        .then(response => response.json())
-                        .then(json => {
-                            this.service = json;
-                        });
-                }
-            });
-
-            const gallery = new Vue({
-                el: '#gallery',
-                data: {
-                    gallery: {items:[{}]},
-                    portfolio_index: 0
-                },
-                methods: {
-                    show_portfolio(i) {
-                        this.portfolio_index = i;
-                    }
-                },
-                created () {
-                    fetch(url + "api/gallery.json")
-                        .then(response => response.json())
-                        .then(json => {
-                            this.gallery = json;
-                        });
-                }
-            });
-        
-            const team = new Vue({
-                el: '#team',
-                data: {
-                    team: {}
-                },
-                created () {
-                    fetch(url + "api/team.json")
-                        .then(response => response.json())
-                        .then(json => {
-                            this.team = json;
-                        });
-                }
-            });
-
-        });
-    </script>
 
     <script src="static/js/jquery.chocolat.js"></script>
     <script src="static/js/owl.carousel.js"></script>
@@ -614,13 +415,11 @@
         <span id="toTopHover" style="opacity: 1;"> </span>
     </a>
 
-    <script type="text/javascript" src="static/js/bootstrap-3.1.1.min.js"></script>
-    <!-- share.js -->
-    <script src="static/js/share/js/jquery.share.min.js"></script>
-
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="static/js/index.js"></script>
 
-
+    <!-- share.js -->
+    <script src="static/js/share/js/jquery.share.min.js"></script>
 </body>
 
 </html>

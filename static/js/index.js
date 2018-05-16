@@ -1,61 +1,9 @@
-jQuery(document).ready(function ($) {
-    //百度地图重置
-    $(".map h4 span").on('click', function () {
-        $('#baidu_map').attr('src', $('#baidu_map').attr('src'));
-    });
+$(function () {
+    // 加载json,渲染页面
+    render_page();
 
-    // //生成关于我们界面
-    // $.ajax({
-    //     type: 'GET',
-    //     dataType: 'html',
-    //     'url': "/about/",
-    // }).done(function (data, textStatus, jqXHR) {
-    //     $("#about").html(data);
-    // });
-    // //生成公益服务界面
-    // $.ajax({
-    //     type: 'GET',
-    //     dataType: 'html',
-    //     'url': "/services/",
-    // }).done(function (data, textStatus, jqXHR) {
-    //     $("#services").html(data);
-    // });
-    // //生成照片展示界面
-    // $.ajax({
-    //     type: 'GET',
-    //     dataType: 'html',
-    //     'url': "/galleries/",
-    // }).done(function (data, textStatus, jqXHR) {
-    //     const placeholder = $("#galleries_placeholder");
-    //     $(data).insertAfter(placeholder);
-    //     placeholder.remove();
-    // });
-    // //生成机构组成界面
-    // $.ajax({
-    //     type: 'GET',
-    //     dataType: 'html',
-    //     'url': "/institutions/",
-    // }).done(function (data, textStatus, jqXHR) {
-    //     $("#team").html(data);
-    // });
-    // //生成精彩活动界面
-    // $.ajax({
-    //     type: 'GET',
-    //     dataType: 'html',
-    //     'url': "/events/",
-    // }).done(function (data, textStatus, jqXHR) {
-    //     const placeholder = $("#events_placeholder");
-    //     $(data).insertAfter(placeholder);
-    //     placeholder.remove();
-    // });
-    // //生成页脚
-    // $.ajax({
-    //     type: 'GET',
-    //     dataType: 'html',
-    //     'url': "/footer/",
-    // }).done(function (data, textStatus, jqXHR) {
-    //     $("#footer").html(data);
-    // });
+    // 加载百度地图
+    load_map()
 
     //发送邮件
     $('#contact_form').submit(function (event) {
@@ -92,20 +40,165 @@ jQuery(document).ready(function ($) {
             $("#contact_form input:eq(2)").val('');
         });
     });
+});
 
-    //进入登录界面
-    let key_inputs = [];
-    $("body").on("keyup", function (event) {
-        const input = $("input#command");
+function load_map() {
+    //百度地图重置
+    $(".map button").on('click', function () {
+        $('#baidu_map').attr('src', $('#baidu_map').attr('src'));
+    });
+}
 
-        if (event.keyCode === 27) {
-            input.val("");
-        } else if (event.keyCode === 13) {
-            input.parent().submit();
-            console.log(input.parent());
-            console.log(input.val());
-        } else {
-            input.val(input.val() + event.keyCode);
+function render_page() {
+
+    const url = "http://www.jxhzd.tk/";
+
+    const v_icon_1 = new Vue({
+        el: "link[rel='icon']",
+        data: {
+            setting: {}
         }
     });
-});
+    const v_icon_2 = new Vue({
+        el: "link[rel='shortcut icon']",
+        data: {
+            setting: {}
+        }
+    });
+
+    const v_top_nav = new Vue({
+        el: "#top-nav",
+        data: {
+            setting: {},
+            navigation: []
+        }
+    });
+
+    const v_slider = new Vue({
+        el: "#slider",
+        data: {
+            sliders: []
+        }
+    });
+
+    const v_about = new Vue({
+        el: '#about',
+        data: {
+            about: {},
+            setting: {}
+        }
+    });
+
+    const v_service = new Vue({
+        el: '#service',
+        data: {
+            service: {}
+        }
+    });
+
+    const v_gallery = new Vue({
+        el: '#gallery',
+        data: {
+            gallery: {items:[{}]},
+            current: 0
+        },
+        methods: {
+            show_portfolio(i) {
+                this.current = i;
+            }
+        }
+    });
+
+    const v_team = new Vue({
+        el: '#team',
+        data: {
+            team: {}
+        }
+    });
+
+    const v_event = new Vue({
+        el: '#event',
+        data: {
+            url: url,
+            event: {items:[{}]},
+            current: 0
+        },
+        methods: {
+            show_portfolio(i) {
+                this.current = i;
+            }
+        }
+    });
+
+    const v_footer = new Vue({
+        el: '#footer',
+        data: {
+            setting: {},
+            about: {},
+            navigation: []
+        }
+    });
+
+    fetch(url + "api/setting.json")
+    .then(response => response.json())
+    .then(json => {
+        v_icon_1.setting = json;
+        v_icon_2.setting = json;
+        v_top_nav.setting = json;
+        v_about.setting = json;
+        v_footer.setting = json;
+    });
+
+    fetch(url + "api/navigation.json")
+    .then(response => response.json())
+    .then(json => {
+        v_top_nav.navigation = json;
+        v_footer.navigation = json;
+    })
+    .then(_ => {
+        scroll_action();
+    });
+
+    fetch(url + "api/sliders.json")
+    .then(response => response.json())
+    .then(json => {
+        v_slider.sliders = json;
+    })
+    .then(_ => {
+        responsive_slides();
+    });
+
+    fetch(url + "api/about.json")
+    .then(response => response.json())
+    .then(json => {
+        v_about.about = json;
+        v_footer.about = json;
+    });
+
+    fetch(url + "api/gallery.json")
+    .then(response => response.json())
+    .then(json => {
+        v_gallery.gallery = json;
+    });
+
+    fetch(url + "api/service.json")
+    .then(response => response.json())
+    .then(json => {
+        v_service.service = json;
+    });
+
+    fetch(url + "api/team.json")
+    .then(response => response.json())
+    .then(json => {
+        v_team.team = json;
+    });
+
+    fetch(url + "api/event.json")
+    .then(response => response.json())
+    .then(json => {
+        v_event.event = json;
+    })
+    .then(_ => {
+        $(".social-share").share();
+    });
+}
